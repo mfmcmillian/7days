@@ -15,14 +15,9 @@ Then open the preview URL printed in the terminal.
 
 ## Deploy to Friendships.dcl.eth
 
-You need a wallet that owns `Friendships.dcl.eth` or has ACL permission on that world.
+Pushes to `main` run `.github/workflows/deploy.yml`: install, `npm run build:ci`, then `npm run deploy:prod` to the Worlds content server.
 
-```bash
-npm install
-npm run deploy
-```
-
-Sign the deployment in the browser window that opens.
+Add a repository secret named `DCL_PRIVATE_KEY` for a wallet that owns `Friendships.dcl.eth` or has ACL permission. Use a disposable operator wallet, not the account that holds valuable assets.
 
 After it publishes, visit:
 

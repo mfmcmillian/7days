@@ -1,0 +1,34 @@
+name: Deploy to Friendships World
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DCL_PRIVATE_KEY: ${{ secrets.DCL_PRIVATE_KEY }}
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install npm packages
+        run: npm install
+
+      - name: Build scene
+        run: npm run build:ci
+
+      - name: Deploy scene
+        run: npm run deploy:prod
+        env:
+          DCL_PRIVATE_KEY: ${{ secrets.DCL_PRIVATE_KEY }}

@@ -4,8 +4,10 @@
   "description": "A new Decentraland game for Friendships.dcl.eth",
   "scripts": {
     "start": "sdk-commands start",
-    "deploy": "sdk-commands deploy --target-content https://worlds-content-server.decentraland.org",
     "build": "sdk-commands build",
+    "build:ci": "sdk-commands build",
+    "deploy": "sdk-commands deploy --target-content https://worlds-content-server.decentraland.org",
+    "deploy:prod": "sdk-commands deploy --target-content https://worlds-content-server.decentraland.org",
     "upgrade-sdk": "npm install --save-dev @dcl/sdk@latest",
     "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
   },
