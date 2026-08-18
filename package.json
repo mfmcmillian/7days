@@ -1,19 +1,17 @@
 {
-  "name": "dcl-project",
-  "version": "1.0.0",
-  "description": "SDK7 Template scene",
+  "name": "friendships-world",
+  "version": "0.1.0",
+  "description": "A new Decentraland game for Friendships.dcl.eth",
   "scripts": {
     "start": "sdk-commands start",
-    "deploy": "sdk-commands deploy",
     "build": "sdk-commands build",
+    "build:ci": "sdk-commands build",
+    "deploy": "sdk-commands deploy --target-content https://worlds-content-server.decentraland.org",
+    "deploy:prod": "sdk-commands deploy --target-content https://worlds-content-server.decentraland.org",
     "upgrade-sdk": "npm install --save-dev @dcl/sdk@latest",
     "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
   },
-  "dependencies": {
-    "@dcl-sdk/utils": "^1.3.2"
-  },
   "devDependencies": {
-    "@dcl/asset-packs": "latest",
     "@dcl/js-runtime": "7.11.2",
     "@dcl/sdk": "7.11.2"
   },
