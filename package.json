@@ -1,30 +1,23 @@
 {
-  "name": "dcl-project",
-  "version": "1.0.0",
-  "description": "SDK7 Template scene",
+  "name": "seven-days-in-hell",
+  "version": "2.0.0",
+  "description": "7 Days in Hell - a mobile-first lane-defense zombie shooter for Decentraland (SDK7).",
+  "private": true,
   "scripts": {
     "start": "sdk-commands start",
-    "deploy": "sdk-commands deploy",
+    "start:mcp": "npx --yes @dcl/sdk-commands@latest start --mcp --port 8000",
     "build": "sdk-commands build",
-    "upgrade-sdk": "npm install --save-dev @dcl/sdk@latest",
-    "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next"
-  },
-  "dependencies": {
-    "@dcl-sdk/utils": "^1.3.2"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "deploy": "sdk-commands deploy",
+    "deploy:world": "sdk-commands deploy --target-content https://worlds-content-server.decentraland.org",
+    "upgrade-sdk": "npm install --save-dev @dcl/sdk@latest @dcl/js-runtime@latest",
+    "upgrade-sdk:next": "npm install --save-dev @dcl/sdk@next @dcl/js-runtime@next"
   },
   "devDependencies": {
-    "@dcl/asset-packs": "latest",
-    "@dcl/js-runtime": "7.11.2",
-    "@dcl/sdk": "7.11.2"
+    "@dcl/js-runtime": "7.29.0",
+    "@dcl/sdk": "7.29.0"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=6.0.0"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 120,
-    "trailingComma": "none"
+    "node": ">=18.0.0"
   }
 }
