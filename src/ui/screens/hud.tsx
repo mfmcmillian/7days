@@ -38,7 +38,7 @@ export function LaneZones(p: { showPads: boolean }) {
                 uiBackground={{ color: active ? C.laneActive : C.laneIdle }}
               >
                 <Label
-                  value={active ? '▲  YOU' : 'TAP TO MOVE'}
+                  value={active ? 'YOU ARE HERE' : 'TAP TO MOVE'}
                   fontSize={F.tiny}
                   color={active ? C.text : C.textFaint}
                   textAlign="middle-center"
@@ -155,7 +155,7 @@ function BottomBar() {
         <UiEntity uiTransform={{ width: '100%', height: 30, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: { top: 8 } }}>
           <Label value={def.name.toUpperCase()} fontSize={F.small} color={C.text} textAlign="middle-left" uiTransform={{ height: '100%' }} />
           <Label
-            value={state.hero.reloading ? 'RELOADING' : state.effects.some((e) => e.kind === 'max_ammo') ? '∞' : `${state.hero.ammo} / ${def.magSize}`}
+            value={state.hero.reloading ? 'RELOADING' : state.effects.some((e) => e.kind === 'max_ammo') ? 'UNLIMITED' : `${state.hero.ammo} / ${def.magSize}`}
             fontSize={F.small}
             color={state.hero.reloading ? C.gold : C.textDim}
             textAlign="middle-right"

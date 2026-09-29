@@ -58,8 +58,8 @@ function buildGroundAndStreet(): void {
   box(Vector3.create(SCENE.width / 2, 0.1, STREET_Z_MIN - 0.4), Vector3.create(SCENE.width, 0.2, 0.8), CURB)
   box(Vector3.create(SCENE.width / 2, 0.1, STREET_Z_MAX + 0.4), Vector3.create(SCENE.width, 0.2, 0.8), CURB)
   // Sidewalks
-  box(Vector3.create(SCENE.width / 2, 0.08, STREET_Z_MIN - 3.4), Vector3.create(SCENE.width, 0.16, 5.2), rgb(0.13, 0.13, 0.135))
-  box(Vector3.create(SCENE.width / 2, 0.08, STREET_Z_MAX + 3.4), Vector3.create(SCENE.width, 0.16, 5.2), rgb(0.13, 0.13, 0.135))
+  box(Vector3.create(SCENE.width / 2, 0.08, STREET_Z_MIN - 2.6), Vector3.create(SCENE.width, 0.16, 3.6), rgb(0.13, 0.13, 0.135))
+  box(Vector3.create(SCENE.width / 2, 0.08, STREET_Z_MAX + 2.6), Vector3.create(SCENE.width, 0.16, 3.6), rgb(0.13, 0.13, 0.135))
   // Faded lane paint between lanes (dashes)
   for (let i = 0; i < LANE_Z.length - 1; i++) {
     const z = (LANE_Z[i] + LANE_Z[i + 1]) / 2
@@ -107,18 +107,21 @@ function building(x: number, z: number, w: number, d: number, h: number, warm: b
 
 function buildSkyline(): void {
   // Two rows of buildings flanking the street. Heights climb toward the spawn end.
-  const rowNear = STREET_Z_MIN - 11
-  const rowFar = STREET_Z_MAX + 11
-  let x = 4
+  // The far row is a shallow facade so everything stays inside the 48m scene depth.
+  const nearDepth = 10
+  const farDepth = 3.6
+  const rowNear = STREET_Z_MIN - 4.5 - nearDepth / 2
+  const rowFar = Math.min(SCENE.depth - 0.1 - farDepth / 2, STREET_Z_MAX + 4.5 + farDepth / 2)
+  let x = 3
   let i = 0
-  while (x < SCENE.width - 2) {
-    const w = 7 + rand() * 6
+  while (x < SCENE.width - 6) {
+    const maxW = SCENE.width - 1 - x
+    const w = Math.min(maxW, 7 + rand() * 6)
     const h = 9 + rand() * 12 + (x / SCENE.width) * 8
-    const d = 10
-    building(x + w / 2, rowNear, w, d, h, i % 2 === 0, i % 3 === 0 ? 'b' : 'a')
-    const w2 = 7 + rand() * 6
+    building(x + w / 2, rowNear, w, nearDepth, h, i % 2 === 0, i % 3 === 0 ? 'b' : 'a')
+    const w2 = Math.min(maxW, 7 + rand() * 6)
     const h2 = 9 + rand() * 12 + (x / SCENE.width) * 8
-    building(x + w2 / 2, rowFar, w2, d, h2, i % 2 === 1, i % 3 === 1 ? 'b' : 'a')
+    building(x + w2 / 2, rowFar, w2, farDepth, h2, i % 2 === 1, i % 3 === 1 ? 'b' : 'a')
     x += Math.max(w, w2) + 1.5
     i++
   }
@@ -169,13 +172,13 @@ function buildStreetDressing(): void {
     streetlight(x, STREET_Z_MIN - 1.2, (x / 12) % 3 !== 1)
     streetlight(x + 6, STREET_Z_MAX + 1.2, (x / 12) % 4 !== 2)
   }
-  wreck(46, STREET_Z_MAX + 3.6, 18, rgb(0.35, 0.12, 0.1))
-  wreck(61, STREET_Z_MIN - 3.4, -12, rgb(0.14, 0.2, 0.32))
-  wreck(HERO_X - 6, STREET_Z_MIN - 3.8, 80, rgb(0.28, 0.28, 0.3))
+  wreck(46, STREET_Z_MAX + 2.6, 18, rgb(0.35, 0.12, 0.1))
+  wreck(61, STREET_Z_MIN - 2.6, -12, rgb(0.14, 0.2, 0.32))
+  wreck(HERO_X - 6, STREET_Z_MIN - 2.8, 80, rgb(0.28, 0.28, 0.3))
 
   // Fires burning far down the street: cheap ambience that sells "the city is burning".
   for (const [fx, fz] of [
-    [SPAWN_X + 2, STREET_Z_MAX + 6],
+    [SPAWN_X + 2, STREET_Z_MAX + 3.2],
     [SPAWN_X - 12, STREET_Z_MIN - 6.5]
   ]) {
     glow(Vector3.create(fx, 0.8, fz), Vector3.create(1.6, 1.2, 1.6), rgb(1.0, 0.45, 0.1), 5)

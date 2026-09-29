@@ -36,6 +36,7 @@
   },
   "worldConfiguration": {
     "name": "Hide.dcl.eth",
+    "miniMapConfig": { "visible": false },
     "skyboxConfig": {
       "fixedTime": 0
     }

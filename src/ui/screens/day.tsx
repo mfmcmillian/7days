@@ -9,7 +9,7 @@ function Stepper(p: { value: number; onChange: (delta: number) => void; canAdd: 
   return (
     <UiEntity uiTransform={{ width: '100%', height: 84, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: { top: 10 } }}>
       <UiEntity uiTransform={{ width: 84, height: 84, justifyContent: 'center', alignItems: 'center' }} uiBackground={{ color: p.value > 0 ? C.btnSecondary : C.btnDisabled }} onMouseDown={() => p.onChange(-1)}>
-        <Label value="−" fontSize={F.h1} color={C.text} textAlign="middle-center" uiTransform={{ width: '100%', height: '100%' }} />
+        <Label value="-" fontSize={F.h1} color={C.text} textAlign="middle-center" uiTransform={{ width: '100%', height: '100%' }} />
       </UiEntity>
       <UiEntity uiTransform={{ width: 130, height: 84, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <Label value={`${p.value}`} fontSize={F.h1} color={C.text} textAlign="middle-center" uiTransform={{ width: '100%', height: 56 }} />
