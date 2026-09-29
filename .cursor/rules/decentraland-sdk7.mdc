@@ -1,0 +1,16 @@
+---
+description: Decentraland SDK7 conventions for 7 Days in Hell
+globs: src/**/*.ts, src/**/*.tsx
+alwaysApply: true
+---
+
+# 7 Days in Hell — working rules
+
+- This is a Decentraland SDK7 scene (`@dcl/sdk` 7.29). Reference material lives in `dclcontext/` — read `sdk7-complete-reference.md` before guessing an API.
+- Mobile first. Every interaction must work with a single tap: no hover, no keyboard-only paths, no drag. Buttons are >= 64 virtual px tall. UI is laid out on a 1600x720 virtual canvas (`src/ui/theme.ts`).
+- Balance numbers live only in `src/config/balance.ts`; world positions only in `src/config/geometry.ts`. Never hard-code them in systems.
+- Visual assets resolve through `src/art/catalog.ts`. Do not reference model paths anywhere else.
+- Gameplay entities are pooled (`systems/*`). Do not `engine.addEntity()` inside a per-frame system.
+- Game flow changes go through `src/core/game.ts`; systems only read `state.phase`.
+- Reused original content (video URLs, dialogue text, audio files) must stay verbatim: `src/config/dialogue.ts`, `src/config/media.ts`, `sounds/`.
+- Verify with `npm run build` (bundle + typecheck) before committing.
