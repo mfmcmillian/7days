@@ -44,11 +44,11 @@ export const WEAPONS: Record<WeaponId, WeaponDef> = {
   shotgun: {
     id: 'shotgun',
     name: 'Riot Shotgun',
-    fireRate: 1.05,
-    damage: 34,
+    fireRate: 1.0,
+    damage: 40,
     magSize: 6,
-    reloadSeconds: 1.9,
-    range: 24,
+    reloadSeconds: 1.8,
+    range: 30,
     projectileSpeed: 40,
     pierce: 3,
     tier: 1,
@@ -60,10 +60,10 @@ export const WEAPONS: Record<WeaponId, WeaponDef> = {
   rifle: {
     id: 'rifle',
     name: 'Marksman Rifle',
-    fireRate: 1.5,
-    damage: 48,
-    magSize: 8,
-    reloadSeconds: 1.6,
+    fireRate: 1.2,
+    damage: 40,
+    magSize: 6,
+    reloadSeconds: 1.7,
     range: 70,
     projectileSpeed: 75,
     pierce: 2,
@@ -77,7 +77,7 @@ export const WEAPONS: Record<WeaponId, WeaponDef> = {
     id: 'assault',
     name: 'Assault Rifle',
     fireRate: 6.5,
-    damage: 11,
+    damage: 13,
     magSize: 32,
     reloadSeconds: 2.0,
     range: 50,
@@ -109,10 +109,10 @@ export interface EnemyDef {
 }
 
 export const ENEMIES: Record<EnemyKind, EnemyDef> = {
-  walker: { kind: 'walker', baseHealth: 42, healthPerNight: 9, speed: 1.7, dps: 7, score: 100, scale: 1.0, moveClip: 'walk' },
-  runner: { kind: 'runner', baseHealth: 26, healthPerNight: 5, speed: 3.4, dps: 5, score: 130, scale: 0.92, moveClip: 'run' },
-  brute: { kind: 'brute', baseHealth: 190, healthPerNight: 45, speed: 1.25, dps: 16, score: 500, scale: 1.45, moveClip: 'walk' },
-  boss: { kind: 'boss', baseHealth: 420, healthPerNight: 130, speed: 1.05, dps: 32, score: 1500, scale: 1.9, moveClip: 'walk' }
+  walker: { kind: 'walker', baseHealth: 55, healthPerNight: 14, speed: 1.9, dps: 7, score: 100, scale: 1.0, moveClip: 'walk' },
+  runner: { kind: 'runner', baseHealth: 32, healthPerNight: 7, speed: 3.6, dps: 5, score: 130, scale: 0.92, moveClip: 'run' },
+  brute: { kind: 'brute', baseHealth: 260, healthPerNight: 60, speed: 1.25, dps: 16, score: 500, scale: 1.45, moveClip: 'walk' },
+  boss: { kind: 'boss', baseHealth: 600, healthPerNight: 180, speed: 1.05, dps: 32, score: 1500, scale: 1.9, moveClip: 'walk' }
 }
 
 export interface NightDef {
@@ -131,13 +131,13 @@ export interface NightDef {
 }
 
 export const NIGHTS: NightDef[] = [
-  { night: 1, horde: 12, runnerRatio: 0.1, brutes: 0, boss: true, spawnInterval: 2.6, bossAt: 0.75, burstChance: 0.0 },
-  { night: 2, horde: 16, runnerRatio: 0.15, brutes: 0, boss: true, spawnInterval: 2.3, bossAt: 0.75, burstChance: 0.08 },
-  { night: 3, horde: 20, runnerRatio: 0.2, brutes: 1, boss: true, spawnInterval: 2.1, bossAt: 0.7, burstChance: 0.12 },
-  { night: 4, horde: 24, runnerRatio: 0.25, brutes: 1, boss: true, spawnInterval: 1.9, bossAt: 0.7, burstChance: 0.16 },
-  { night: 5, horde: 28, runnerRatio: 0.3, brutes: 1, boss: true, spawnInterval: 1.7, bossAt: 0.65, burstChance: 0.2 },
-  { night: 6, horde: 32, runnerRatio: 0.35, brutes: 2, boss: true, spawnInterval: 1.5, bossAt: 0.65, burstChance: 0.25 },
-  { night: 7, horde: 36, runnerRatio: 0.4, brutes: 2, boss: true, spawnInterval: 1.3, bossAt: 0.6, burstChance: 0.3 }
+  { night: 1, horde: 12, runnerRatio: 0.1, brutes: 0, boss: true, spawnInterval: 2.4, bossAt: 0.75, burstChance: 0.0 },
+  { night: 2, horde: 16, runnerRatio: 0.15, brutes: 0, boss: true, spawnInterval: 2.1, bossAt: 0.75, burstChance: 0.08 },
+  { night: 3, horde: 20, runnerRatio: 0.2, brutes: 1, boss: true, spawnInterval: 1.9, bossAt: 0.7, burstChance: 0.12 },
+  { night: 4, horde: 24, runnerRatio: 0.25, brutes: 1, boss: true, spawnInterval: 1.7, bossAt: 0.7, burstChance: 0.16 },
+  { night: 5, horde: 28, runnerRatio: 0.3, brutes: 1, boss: true, spawnInterval: 1.5, bossAt: 0.65, burstChance: 0.2 },
+  { night: 6, horde: 32, runnerRatio: 0.35, brutes: 2, boss: true, spawnInterval: 1.35, bossAt: 0.65, burstChance: 0.25 },
+  { night: 7, horde: 36, runnerRatio: 0.4, brutes: 2, boss: true, spawnInterval: 1.2, bossAt: 0.6, burstChance: 0.3 }
 ]
 
 export const TOTAL_NIGHTS = NIGHTS.length

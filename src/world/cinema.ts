@@ -18,7 +18,7 @@ export function buildCinema(): void {
   const facing = Quaternion.fromEulerDegrees(0, 180, 0)
   plane(
     Vector3.create(CINEMA.x, CINEMA.y, CINEMA.z + 0.6),
-    Vector3.create(90, 60, 1),
+    Vector3.create(70, 44, 1),
     facing,
     rgb(0, 0, 0)
   )

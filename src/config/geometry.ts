@@ -14,7 +14,7 @@ export const SCENE = {
 
 export const LANE_COUNT = 3
 /** Lane Z positions, ordered screen-left -> screen-right. */
-export const LANE_Z: readonly number[] = [35.5, 31, 26.5]
+export const LANE_Z: readonly number[] = [36.5, 31, 25.5]
 export const CENTER_LANE = 1
 export const STREET_CENTER_Z = LANE_Z[CENTER_LANE]
 
@@ -31,12 +31,12 @@ export const SPAWN_X_JITTER = 3
 export const PROJECTILE_Y = 1.25
 export const PICKUP_Y = 0.9
 
-export const STREET_WIDTH = 16 // along Z
+export const STREET_WIDTH = 18 // along Z
 export const STREET_Z_MIN = STREET_CENTER_Z - STREET_WIDTH / 2
 export const STREET_Z_MAX = STREET_CENTER_Z + STREET_WIDTH / 2
 
 /** Where the (hidden, locked) real player avatar is parked. */
-export const PLAYER_PARK = { x: 4, y: 0.2, z: 31 }
+export const PLAYER_PARK = { x: 1.5, y: 0.2, z: 6 }
 
 /** Cinema screen used for the intro / briefing / outro videos. */
 export const CINEMA = {

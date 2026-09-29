@@ -190,7 +190,8 @@ function hideAvatars(): void {
   AvatarModifierArea.create(e, {
     area: Vector3.create(SCENE.width, SCENE.height, SCENE.depth),
     modifiers: [AvatarModifierType.AMT_HIDE_AVATARS, AvatarModifierType.AMT_DISABLE_PASSPORTS],
-    excludeIds: []
+    // NPC avatar ids used by the hero/survivors, in case the explorer applies the area to AvatarShape entities too.
+    excludeIds: ['seven-days-hero', 'survivor-0', 'survivor-1', 'survivor-2', 'survivor-3']
   })
 }
 

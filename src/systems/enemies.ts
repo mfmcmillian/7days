@@ -2,7 +2,7 @@ import { Entity, MeshRenderer, Transform, engine } from '@dcl/sdk/ecs'
 import { Quaternion, Vector3 } from '@dcl/sdk/math'
 import { art } from '../art/catalog'
 import { ENEMIES, EnemyKind, HERO } from '../config/balance'
-import { BARRICADE_ATTACK_X, HERO_ATTACK_X, LANE_Z, SPAWN_X, SPAWN_X_JITTER } from '../config/geometry'
+import { BARRICADE_ATTACK_X, BARRICADE_X, HERO_ATTACK_X, LANE_Z, SPAWN_X, SPAWN_X_JITTER } from '../config/geometry'
 import { playSfx } from '../core/audio'
 import { shakeCamera } from '../core/camera'
 import { hasEffect, isPlaying, pushToast, state } from '../core/state'
@@ -18,6 +18,7 @@ export interface Enemy {
   kind: EnemyKind
   lane: number
   x: number
+  z: number
   health: number
   maxHealth: number
   state: EnemyState
@@ -58,6 +59,7 @@ function makeEnemy(): Enemy {
     kind: 'walker',
     lane: 1,
     x: SPAWN_X,
+    z: LANE_Z[1],
     health: 1,
     maxHealth: 1,
     state: 'idle',
@@ -103,6 +105,7 @@ export function spawnEnemy(kind: EnemyKind, lane: number): Enemy | null {
   rec.kind = kind
   rec.lane = lane
   rec.x = SPAWN_X + (Math.random() - 0.5) * 2 * SPAWN_X_JITTER
+  rec.z = LANE_Z[lane]
   rec.maxHealth = def.baseHealth + def.healthPerNight * (night - 1)
   rec.health = rec.maxHealth
   rec.state = 'walking'
@@ -159,7 +162,7 @@ export function damageEnemy(rec: Enemy, amount: number, hitY = 1.2): boolean {
   if (!rec.active || rec.state === 'dying') return false
   const dmg = hasEffect('instant_kill') && rec.kind !== 'boss' ? rec.health : amount
   rec.health -= dmg
-  spawnHitSpark(Vector3.create(rec.x - 0.3, hitY, LANE_Z[rec.lane]), rec.kind === 'boss' || rec.kind === 'brute')
+  spawnHitSpark(Vector3.create(rec.x - 0.3, hitY, rec.z), rec.kind === 'boss' || rec.kind === 'brute')
   if (rec.kind === 'boss') state.nightStats.bossHealth = Math.max(0, rec.health)
   if (rec.health > 0) return false
   kill(rec)
@@ -226,6 +229,17 @@ function enemySystem(dt: number): void {
       if (Math.random() < 0.5) playSfx(Math.random() < 0.5 ? 'growl' : 'growl2', 0.3)
     }
 
+    // Once the wall is gone, anything past it comes straight for the hero, whichever lane they stand in.
+    if (!barricadeUp && rec.x < BARRICADE_X - 0.5 && rec.lane !== state.hero.lane) {
+      rec.lane = state.hero.lane
+    }
+    const targetZ = LANE_Z[rec.lane]
+    if (Math.abs(rec.z - targetZ) > 0.01) {
+      const dz = targetZ - rec.z
+      const step = 2.5 * dt
+      rec.z = Math.abs(dz) <= step ? targetZ : rec.z + Math.sign(dz) * step
+    }
+
     if (rec.x > stopX) {
       if (rec.state !== 'walking') {
         rec.state = 'walking'
@@ -233,10 +247,10 @@ function enemySystem(dt: number): void {
       }
       rec.x = Math.max(stopX, rec.x - def.speed * rec.speedJitter * dt)
       const t = Transform.getMutable(rec.entity)
-      t.position = Vector3.create(rec.x, art('zombie').yOffset, LANE_Z[rec.lane])
+      t.position = Vector3.create(rec.x, art('zombie').yOffset, rec.z)
       if (rec.kind === 'brute' || rec.kind === 'boss') {
         const rt = Transform.getMutable(rec.ring)
-        rt.position = Vector3.create(rec.x, 0.05, LANE_Z[rec.lane])
+        rt.position = Vector3.create(rec.x, 0.05, rec.z)
       }
     } else {
       if (rec.state !== 'attacking') {

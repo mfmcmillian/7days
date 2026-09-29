@@ -23,7 +23,7 @@ let current: CameraPose = 'play'
 let lastAspect = 0
 let shakeTime = 0
 let shakeStrength = 0
-let basePlayPos = Vector3.create(HERO_X - 9, 7.5, STREET_CENTER_Z)
+let basePlayPos = Vector3.create(HERO_X - 8, 7, STREET_CENTER_Z)
 let basePlayLook = Vector3.create(HERO_X + 14, 0.6, STREET_CENTER_Z)
 
 export function currentAspect(): number {
@@ -47,8 +47,8 @@ function clamp01(v: number): number {
 function layoutPlay(aspect: number): void {
   // t = 0 -> landscape (16:9 and wider), t = 1 -> tall portrait (~9:19.5)
   const t = clamp01((1.6 - aspect) / (1.6 - 0.46))
-  const back = lerp(9, 11, t)
-  const height = lerp(7.5, 17, t)
+  const back = lerp(8, 11, t)
+  const height = lerp(7, 17, t)
   const lookAhead = lerp(14, 9, t)
   basePlayPos = Vector3.create(HERO_X - back, height, STREET_CENTER_Z)
   basePlayLook = Vector3.create(HERO_X + lookAhead, 0.6, STREET_CENTER_Z)

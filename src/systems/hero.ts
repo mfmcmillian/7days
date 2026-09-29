@@ -52,7 +52,7 @@ export function installHero(): void {
 
   weaponEntity = engine.addEntity()
   Transform.create(weaponEntity, {
-    position: Vector3.create(0.22, 1.28, 0.42),
+    position: Vector3.create(0.24, 1.22, 0.55),
     parent: heroRoot
   })
   applyWeaponModel(state.hero.weapon)

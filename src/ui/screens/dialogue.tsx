@@ -3,7 +3,6 @@ import { state } from '../../core/state'
 import { Bar, Btn } from '../components'
 import { C, F } from '../theme'
 import { advanceDialogue, currentIndex, currentLines, lineProgress, skipDialogue } from '../dialogueController'
-import { LaneZones } from './hud'
 
 const SPEAKER_COLOR: Record<string, typeof C.text> = {
   HQ: C.blue,
@@ -21,9 +20,8 @@ export function DialogueScreen() {
   const heading = state.dialogueFor === 'outro' ? 'INCOMING TRANSMISSION' : `NIGHT ${state.dialogueFor} — INCOMING TRANSMISSION`
   return (
     <UiEntity uiTransform={{ positionType: 'absolute', position: { top: 0, left: 0 }, width: '100%', height: '100%' }}>
-      {/* Tapping anywhere advances; lanes still respond so players can pre-position. */}
+      {/* Tapping anywhere advances. */}
       <UiEntity uiTransform={{ positionType: 'absolute', position: { top: 0, left: 0 }, width: '100%', height: '100%' }} uiBackground={{ color: C.ghost }} onMouseDown={advanceDialogue} />
-      {state.dialogueFor !== 'outro' ? <LaneZones showPads={false} /> : null}
 
       <UiEntity
         uiTransform={{

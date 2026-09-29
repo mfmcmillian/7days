@@ -34,7 +34,7 @@ export const ART = {
   // --- Characters -----------------------------------------------------------
   zombie: {
     src: 'models/placeholders/zombie.glb',
-    scale: 1,
+    scale: 0.8,
     yaw: 0,
     yOffset: 0,
     clips: { idle: 'idle', walk: 'walk', run: 'run', attack: 'attack', die: 'die' },
@@ -62,11 +62,12 @@ export const ART = {
     synty: 'POLYGON Apocalypse - SM_Chr_Survivor_*'
   } as ModelEntry,
 
-  // --- Weapons (held by the hero, muzzle pointing +X after yaw) -------------
-  weapon_pistol: { src: 'models/placeholders/pistol.glb', scale: 1, yaw: 90, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Pistol_01' } as ModelEntry,
-  weapon_shotgun: { src: 'models/placeholders/shotgun.glb', scale: 1, yaw: 90, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Shotgun_01' } as ModelEntry,
-  weapon_rifle: { src: 'models/placeholders/rifle.glb', scale: 1, yaw: 90, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Rifle_Sniper_01' } as ModelEntry,
-  weapon_assault: { src: 'models/placeholders/rifle.glb', scale: 0.95, yaw: 90, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Rifle_Assault_01' } as ModelEntry,
+  // --- Weapons: children of the hero root (which faces +X), so local +Z is the firing direction.
+  //     The placeholder GLBs are 2m-long showroom models, hence the small scales. ------------
+  weapon_pistol: { src: 'models/placeholders/pistol.glb', scale: 0.16, yaw: 0, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Pistol_01' } as ModelEntry,
+  weapon_shotgun: { src: 'models/placeholders/shotgun.glb', scale: 0.42, yaw: 0, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Shotgun_01' } as ModelEntry,
+  weapon_rifle: { src: 'models/placeholders/rifle.glb', scale: 0.5, yaw: 0, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Rifle_Sniper_01' } as ModelEntry,
+  weapon_assault: { src: 'models/placeholders/rifle.glb', scale: 0.46, yaw: 0, yOffset: 0, synty: 'POLYGON Military - SM_Wep_Rifle_Assault_01' } as ModelEntry,
 
   // --- Defenses & pickups ---------------------------------------------------
   barricade: { src: null, scale: 1, yaw: 0, yOffset: 0, synty: 'POLYGON Apocalypse - SM_Prop_Barricade_Sandbags_* (x3 lanes)' } as ModelEntry,
